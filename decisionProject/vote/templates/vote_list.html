@@ -1,5 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
 <h2>Vote Board</h2>
-
+<a href="{% url 'create' %}">create</a>
+{% if question_list %}
+    <ul>
+    {% for question in question_list %}
+        <li><a href="{%url 'detail' question.id%}">{{ question.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No vote.</p>
+{% endif %}
 {% endblock %}
