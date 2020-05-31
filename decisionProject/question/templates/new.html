@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<h3>My new question</h3>
+
+
+    <form action="{% url 'create' %}" method="POST">
+    {% csrf_token %}
+    <p>제목: <input type="text" name="title"></p>
+   
+    <p>내용: <textarea name="content" id="" cols="30" rows="10"></textarea></p>
+
+    <button type = "submit">작성!</button>
+    <br>
+    <br>
+    <a href="{% url 'list' %}" method="POST" type="button">뒤로가기!</a>
+    {% endblock %}
