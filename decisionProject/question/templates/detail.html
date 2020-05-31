@@ -2,23 +2,53 @@
 
 <h1>Question detail</h1>
 <br>
-<br>
 <h2>{{question.title}}</h2>
+<br>
+<h4>{{question.writer}}</h4>
 <hr>
 <p>{{question.pub_date}}</p>
 <hr>
 <p>{{question.content}}</p>
-    {% csrf_token %}
+    
         <a href = "{% url 'edit' question.id %}">edit</a>
+        <br>
         <a href = "{% url 'delete' question.id %}">delete</a>
+        <br>
         <a href = "{% url 'list' %}">list</a>
+        <br>
+        <br>
+        <hr>
+        <h2>ANSWER</h2>
+        <details>
+            <summary>댓글작성</summary>
+            <form action = "{% url 'create_answer' question.id %}" method="POST">
+                {% csrf_token %}
+            <p>작성자 : <input type="text" name="writer"></p>
+            <p> 내용 : <textarea name ="content" id="" cols="30" rows="10" ></textarea></p>
+    
+            <button type = "submit">답변</button>
+            </form>
+        </details>
+       
+
+        <hr>
+        
+        <h3>answer list</h3>
+        <a href="{% url 'create_answer' question.id %}" method="POST">
+        {% for ans in answer %}
+        <p>{{ans.writer}}</p>
+        <p>{{ans.content}}</p>
+        <hr>
+        {% endfor %}
+        </a>
+
 <br>
+<hr>
+<hr>
+<br>
+
+
 {% endblock %}
-<!-- <form action = "{% url 'answer' question.id %}" method="POST">
-    {% csrf_token %}
-<p> 내용 : <textarea name ="content" id="" cols="30" rows="10" ></textarea></p>
-<p>작성자 : <input type="writer" value = "{{answer.writer}}"></p>
-<button type = "submit">작성</button>
-</form> -->
+
 
 <!-- answer를 어떻게 만들어야할까..? -->

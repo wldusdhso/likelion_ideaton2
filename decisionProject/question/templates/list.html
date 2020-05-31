@@ -20,6 +20,28 @@
         <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
       </svg>
         <a href="{% url 'new' %}" method= "POST">more</a>
+        <hr>
+        {%for question in questions%}
+        <br>
+        <br>
+        <a href="{% url 'detail' question.id %}" method="POST">
+            <br>
+            <hr>
+            <h5>{{question.title}}</h5>
+            <br>
+            작성자:{{question.writer}} 
+            <br>
+            {{question.pub_date}}
+            <br>
+            <hr>
+            {{question.summary}}
+            <br>
+            <br>
+            <hr>
+            <hr>
+        </a>
+
+        {% endfor %}
         
     <br>
     
