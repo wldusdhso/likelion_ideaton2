@@ -6,3 +6,7 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ['title', 'writer']
 
+class ChoiceForm(forms.ModelForm):
+    class Meta:
+        model = Choice
+        fields = ['text']

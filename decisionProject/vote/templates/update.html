@@ -29,15 +29,20 @@
 
 <form method="POST" enctype='multipart/form-data'>
     {%csrf_token%}
-    제목 : <input type="text" name="title" /> <br />
-    작성자 : <input type="text" name="writer" /> <br />
+    제목 : <input type="text" name="title" value="{{question.title}}"/> <br />
+    작성자 : <input type="text" name="writer" value="{{question.writer}}"/> <br />
 
     <hr />
     choice : <input type="text" id="input_choice" />
     <button type="button" id="add_btn">ADD</button>
-    <input type="hidden" id="count" name="count" value="0">
+    <input type="hidden" id="count" name="count" value="{{question.choice_set.count}}">
     <br /><br />
-    <div id="choice_area"></div>
+    <div id="choice_area">
+        {% for choice in question.choice_set.all %}
+        <p>{{choice.text}}</p>
+        <input type="hidden" name="text{{forloop.counter}}" value="{{choice.text}}">
+        {% endfor %}
+    </div>
     <hr />
 
     <button type="submit">제출</button>

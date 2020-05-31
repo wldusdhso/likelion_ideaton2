@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Question
+from .models import Question, Choice
 from django.utils import timezone
-from .form import QuestionForm
 # Create your views here.
 
 def vote_list(request):
@@ -18,15 +17,21 @@ def vote(request, question_id):
 
 def create(request):
     if request.method =='POST':
-        form = QuestionForm(request.POST)
-        if form.is_valid():
-            content = form.save(commit=False)
-            content.pub_date = timezone.now()
-            content.save()
-            return redirect('vote_list')
+        new_question = Question()
+        new_question.title = request.POST['title']
+        new_question.pub_date = timezone.now()
+        new_question.writer = request.POST['writer']
+        new_question.save()
+
+        for i in range(int(request.POST['count'])):
+            new_choice = Choice()
+            text = 'text'+str(i)
+            new_choice.question = new_question
+            new_choice.text = request.POST[text]
+            new_choice.save()
+        return redirect('vote_list')
     else :
-        form = QuestionForm()
-        return render(request, 'create.html', {'form':form})
+        return render(request, 'create.html')
 
 def add_vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -34,3 +39,10 @@ def add_vote(request, question_id):
     selected_choice.votes += 1
     selected_choice.save()
     return redirect('detail', question_id)
+
+def update(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'update.html', {'question': question})
+
+def delete(request, question_id):
+    return redirect('vote_list')
