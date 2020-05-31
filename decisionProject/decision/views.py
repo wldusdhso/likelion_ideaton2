@@ -4,7 +4,9 @@ from .form import DecisionForm
 from django.shortcuts import render
 import random
 
+
 # Create your views here.
+
 
 def list(request):
     if request.method == 'POST':
