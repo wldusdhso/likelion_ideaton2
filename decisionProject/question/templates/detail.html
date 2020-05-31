@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Question detail</h1>
+<br>
+<br>
+<h2>{{question.title}}</h2>
+<hr>
+<p>{{question.pub_date}}</p>
+<hr>
+<p>{{question.content}}</p>
+    {% csrf_token %}
+        <a href = "{% url 'edit' question.id %}">edit</a>
+        <a href = "{% url 'delete' question.id %}">delete</a>
+        <a href = "{% url 'list' %}">list</a>
+<br>
+{% endblock %}
+<!-- <form action = "{% url 'answer' question.id %}" method="POST">
+    {% csrf_token %}
+<p> 내용 : <textarea name ="content" id="" cols="30" rows="10" ></textarea></p>
+<p>작성자 : <input type="writer" value = "{{answer.writer}}"></p>
+<button type = "submit">작성</button>
+</form> -->
+
+<!-- answer를 어떻게 만들어야할까..? -->
