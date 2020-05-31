@@ -1,0 +1,46 @@
+  
+{% extends 'base.html' %} {% block content %}
+
+<script type="text/javascript">
+    window.onload = function () {
+      console.log("test start!");
+      var add_btn = document.getElementById("add_btn");
+      var num_of_count = document.getElementById("count");
+      var choice_area = document.getElementById("choice_area");
+  
+      add_btn.onclick = function () {
+        var element = document.createElement("p");
+        element.innerHTML = document.getElementById("input_choice").value;
+        choice_area.appendChild(element);
+
+        var hidden_elem = document.createElement("input");
+        hidden_elem.type = "hidden";
+        hidden_elem.name = "text".concat(num_of_count.value);
+        hidden_elem.value = document.getElementById("input_choice").value;
+        console.log(hidden_elem.name)
+        choice_area.appendChild(hidden_elem);
+
+        num_of_count.value = parseInt(num_of_count.value)+1;
+      };
+    };
+</script>
+
+<h1>결정장애를 위한 웹서비스입니다.</h1>
+
+<form method="POST" enctype='multipart/form-data'>
+    {%csrf_token%}
+    제목 : <input type="text" name="title" /> <br />
+    작성자 : <input type="text" name="writer" /> <br />
+
+    <hr />
+    choice : <input type="text" id="input_choice" />
+    <button type="button" id="add_btn">ADD</button>
+    <input type="hidden" id="count" name="count" value="0">
+    <br /><br />
+    <div id="choice_area"></div>
+    <hr />
+
+    <button type="submit">제출</button>
+</form>
+
+{% endblock %}

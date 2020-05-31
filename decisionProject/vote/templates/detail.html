@@ -1,0 +1,10 @@
+<h1>{{ question.title }}</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.text }} ----- {{ choice.votes }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'vote_list' %}">Home</a>
+<a href="{% url 'vote' question.id %}">Vote</a>
