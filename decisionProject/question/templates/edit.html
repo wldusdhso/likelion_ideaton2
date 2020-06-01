@@ -5,7 +5,7 @@
 <form action = "{% url 'update' question.id %}" method="POST">
     {% csrf_token %}
 <p> 제목: <input type ="text" name ="title" value = "{{question.title}}"></p>
-<p> 작성자: <input type ="text" name ="writer" value = "{{question.writer}}">{{question.writer}}</p>
+<p> 작성자: <input type ="text" name ="writer" value = "{{question.writer}}"></p>
 <p>내용: <textarea name="content" id="" cols="30" rows="10">{{question.content}}</textarea></p>
 <button type = "submit">작성</button>
 <a href="{% url 'list' %}" method="POST" type="button">뒤로가기!</a>
