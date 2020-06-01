@@ -24,7 +24,7 @@
             <form action = "{% url 'create_answer' question.id %}" method="POST">
                 {% csrf_token %}
             <p>작성자 : <input type="text" name="writer"></p>
-            <p> 내용 : <textarea name ="content" id="" cols="30" rows="10" ></textarea></p>
+            <p> 내용 : <textarea name ="content" id="" cols="30" rows="10"></textarea></p>
     
             <button type = "submit">답변</button>
             </form>
@@ -34,13 +34,27 @@
         <hr>
         
         <h3>answer list</h3>
-        <a href="{% url 'create_answer' question.id %}" method="POST">
+        
         {% for ans in answer %}
+      
         <p>{{ans.writer}}</p>
         <p>{{ans.content}}</p>
+        <details>
+            <summary>댓글수정</summary>
+            <hr>
+            <form action = "{% url 'update_answer' answer.id %}" method="POST">
+                {% csrf_token %}
+            <p>작성자 ID : <input type="text" name="writer" value="{{answer.writer}}"></p>
+            <p> 내용 : <textarea name ="content" id="" cols="30" rows="10" value="{{answer.content}}"></textarea></p>
+    
+            <button type = "submit">답변수정</button>
+            </form>
+        </details>
+        <br>  
+        <br>
         <hr>
         {% endfor %}
-        </a>
+      
 
 <br>
 <hr>
@@ -52,3 +66,4 @@
 
 
 <!-- answer를 어떻게 만들어야할까..? -->
+<!-- <a href = "{% url 'delete' create_answer.id %}">delete</a> -->

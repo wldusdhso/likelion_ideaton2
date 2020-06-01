@@ -46,10 +46,6 @@ def delete(request,question_id):
     return redirect ('list')
 
 
-# def create_answer(request):
-#     return redirect('detail/'+ )
-
-
 def create_answer(request, question_id):
     new_answer = Answer()
     new_answer.writer = request.POST['writer']
@@ -61,21 +57,15 @@ def create_answer(request, question_id):
     print('create test')
     return redirect('detail',question_id) 
     
-# detail_answer = Answer()
-#     detail_answer.writer = request.POST['writer']
-#     detail_answer.content = request.POST['content']
-#     detail_answer.pub_date = timezone.datetime.now()
-#     detail_answer.save()
-#     return redirect('detail')
 
-# def create(request, question_id):
-#     detail_answer = Answer()
-#     detail_answer.writer = request.POST['writer']
-#     detail_answer.content = request.POST['content']
-#     detail_answer.pub_date = timezone.datetime.now()
-#     detail_answer.save()
-#     return redirect('detail')
-def answer_edit(request,question_id):    
-    question = get_object_or_404(Question,pk = question_id)
-    return render(request,'answer_edit.html',{'question':question})
+def edit_answer(request,answer_id):
+    answer = get_object_or_404(Answer,pk = answer_id)
+    return redirect('detail',answer)
 
+
+def update_answer(request,answer_id):
+    edit_answer = get_object_or_404(Answer,pk = answer_id)
+    edit_answer.writer = request.POST['writer']
+    edit_answer.content = request.POST['content']
+    edit_answer.save()
+    return redirect('/answer/'+ str(edit_answer.id))
