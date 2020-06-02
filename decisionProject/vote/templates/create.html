@@ -13,21 +13,37 @@
         element.innerHTML = document.getElementById("input_choice").value;
         choice_area.appendChild(element);
 
+        var rem_btn = document.createElement("button");
+        rem_btn.type = "button";
+        rem_btn.addEventListener('click', function(){
+          choice_area.removeChild(element);
+          num_of_count.value = parseInt(num_of_count.value)-1;
+        });
+        rem_btn.innerHTML = 'DEL'
+        element.appendChild(rem_btn);
+
         var hidden_elem = document.createElement("input");
         hidden_elem.type = "hidden";
-        hidden_elem.name = "text".concat(num_of_count.value);
+        hidden_elem.className = "hidden_elem"
         hidden_elem.value = document.getElementById("input_choice").value;
-        console.log(hidden_elem.name)
-        choice_area.appendChild(hidden_elem);
+        element.appendChild(hidden_elem);
 
         num_of_count.value = parseInt(num_of_count.value)+1;
       };
+      
     };
-</script>
 
+  function givenum(){
+    var elem = document.getElementsByClassName('hidden_elem');
+    var num_of_count = document.getElementById("count");
+    for (var i=0; i<parseInt(num_of_count.value); i++){
+      elem[i].name = 'text'.concat(i);
+    }
+  }
+</script>
 <h1>결정장애를 위한 웹서비스입니다.</h1>
 
-<form method="POST" enctype='multipart/form-data'>
+<form method="POST" enctype='multipart/form-data' onsubmit="givenum()">
     {%csrf_token%}
     제목 : <input type="text" name="title" /> <br />
     작성자 : <input type="text" name="writer" /> <br />

@@ -1,5 +1,10 @@
 <h1>{{ question.title }}</h1>
 
+<a href="{%url 'update' question.id%}">수정</a>
+<a href="{%url 'delete' question.id%}">삭제</a>
+
+<hr>
+
 <ul>
 {% for choice in question.choice_set.all %}
     <li>{{ choice.text }} ----- {{ choice.votes }}</li>

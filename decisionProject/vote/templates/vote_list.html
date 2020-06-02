@@ -6,8 +6,6 @@
     <ul>
     {% for question in question_list %}
         <li><a href="{%url 'detail' question.id%}">{{ question.title }}</a>
-            <a href="{%url 'update' question.id%}">수정</a>
-            <a href="{%url 'delete' question.id%}">삭제</a>
         </li>
     {% endfor %}
     </ul>

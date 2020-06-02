@@ -41,8 +41,38 @@ def add_vote(request, question_id):
     return redirect('detail', question_id)
 
 def update(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'update.html', {'question': question})
+    if request.method =='POST':
+        upd_question = get_object_or_404(Question, pk=question_id)
+        upd_question.title = request.POST['title']
+        upd_question.pub_date = timezone.now()
+        upd_question.writer = request.POST['writer']
+        upd_question.save()
+
+        for i in range(int(request.POST['count'])):
+            try:
+                upd_choice = upd_question.choice_set.get(pk=request.POST['choice'])
+            except (Choice.DoesNotExist):
+                upd_choice = Choice()
+            else:
+                text = 'text'+str(i)
+                upd_choice.question = upd_question
+                upd_choice.text = request.POST[text]
+                upd_choice.save()
+                upd_question.choice_set = new_choice_set
+
+        return redirect('vote_list')
+    else :
+        question = get_object_or_404(Question, pk=question_id)
+        return render(request, 'update.html', {'question': question})
 
 def delete(request, question_id):
+    del_question = get_object_or_404(Question, pk=question_id)
+    del_question.delete()
     return redirect('vote_list')
+
+def delete_choice(request, question_id, choice_id):
+    question = get_object_or_404(Question, pk=question_id)
+    deleted_choice = question.choice_set.get(pk=choice_id)
+    delete_choice.delete()
+    question.save()
+    return redirect('')
