@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Question, Answer
 from django.shortcuts import render,get_object_or_404,redirect
 from django.utils import timezone
+
 # Create your views here.
 
 def list(request):
@@ -25,7 +26,7 @@ def detail(request,question_id):
 
     answer = Answer.objects.filter(question_id=question_id)
     print(answer)
-    return render(request, 'detail.html',{'question':question, 'answer':answer})
+    return render(request, 'detail.html',{'question':question, 'answer':answer,'edit_answer':edit_answer})
 
 def edit(request,question_id):    
     question = get_object_or_404(Question,pk = question_id)
@@ -60,12 +61,12 @@ def create_answer(request, question_id):
 
 def edit_answer(request,answer_id):
     answer = get_object_or_404(Answer,pk = answer_id)
-    return redirect('detail',answer)
-
+    return render('update_answer')
 
 def update_answer(request,answer_id):
     edit_answer = get_object_or_404(Answer,pk = answer_id)
     edit_answer.writer = request.POST['writer']
     edit_answer.content = request.POST['content']
+    question_id = edit_answer.question_id
     edit_answer.save()
-    return redirect('/answer/'+ str(edit_answer.id))
+    return redirect('detail',question_id) 
