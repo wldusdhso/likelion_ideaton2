@@ -67,6 +67,7 @@ def update_answer(request,answer_id):
     edit_answer = get_object_or_404(Answer,pk = answer_id)
     edit_answer.writer = request.POST['writer']
     edit_answer.content = request.POST['content']
+    edit_answer.pub_date = timezone.datetime.now()
     question_id = edit_answer.question_id
     edit_answer.save()
     return redirect('detail',question_id) 
