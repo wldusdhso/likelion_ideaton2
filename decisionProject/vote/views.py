@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Question, Choice
 from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your views here.
 
 def vote_list(request):
@@ -20,7 +21,7 @@ def create(request):
         new_question = Question()
         new_question.title = request.POST['title']
         new_question.pub_date = timezone.now()
-        new_question.writer = request.POST['writer']
+        new_question.writer = request.user
         new_question.save()
 
         for i in range(int(request.POST['count'])):

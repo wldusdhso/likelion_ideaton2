@@ -9,11 +9,13 @@
 
     add_btn.onclick = function () {
       var element = document.createElement("p");
+      element.className = "text-md-left";
       element.innerHTML = document.getElementById("input_choice").value;
       choice_area.appendChild(element);
 
       var rm_btn = document.createElement("button");
       rm_btn.type = "button";
+      rm_btn.className = "btn btn-outline-dark";
       rm_btn.addEventListener("click", function () {
         choice_area.removeChild(element);
         num_of_count.value = parseInt(num_of_count.value) - 1;
@@ -67,6 +69,8 @@
       name="writer"
       aria-label="Username"
       aria-describedby="basic-addon1"
+      value="{{user.username}}"
+      readonly
     />
   </div>
 

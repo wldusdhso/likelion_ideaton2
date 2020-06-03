@@ -1,9 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 
 <h1>{{ question.title }}</h1>
+
+{% if user.username == question.writer %}
 <div align="right"><button type="button" class="btn btn-outline-dark">
     <a href="{%url 'vote:delete' question.id%}">삭제</a></button></div>
-
+{% else %}
+{% endif %}
 
 <ul class="list-group list-group-flush">
 {% for choice in question.choice_set.all %}

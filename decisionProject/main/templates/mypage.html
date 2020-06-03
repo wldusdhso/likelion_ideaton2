@@ -1,5 +1,4 @@
 {% extends 'base.html' %} {% block content %}
-
 <h1>My Page</h1>
 <hr />
 <div class="row">
@@ -11,11 +10,10 @@
         alt="..."
       />
       <div class="card-body">
-        <h5 class="card-title">Username</h5>
+        <h5 class="card-title">{{user.username}}</h5>
         <p class="card-text">
-          유저 소개 글
+          email > {{user.email}}
         </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
@@ -30,7 +28,7 @@
             href="#list-home"
             role="tab"
             aria-controls="home"
-            >나의 투표</a
+            >나의 결정</a
           >
           <a
             class="list-group-item list-group-item-action"
@@ -57,7 +55,7 @@
             href="#list-settings"
             role="tab"
             aria-controls="settings"
-            >Settings</a
+            >나의 투표</a
           >
         </div>
       </div>
@@ -69,7 +67,17 @@
             role="tabpanel"
             aria-labelledby="list-home-list"
           >
-            dsd
+            {% for decision in Decision %}
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+              <div class="card-header">
+                {% if decision.result %} YES {% else %} NO {% endif%}
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{decision.choice_content}}</h5>
+                <p class="card-text"></p>
+              </div>
+            </div>
+            {% endfor %}
           </div>
           <div
             class="tab-pane fade"
@@ -77,16 +85,18 @@
             role="tabpanel"
             aria-labelledby="list-profile-list"
           >
+            {% for q in Question %}
             <div class="card bg-light mb-3" style="max-width: 18rem;">
-              <div class="card-header">Header</div>
+              <div class="card-header">
+                {{q.title}}
+              </div>
               <div class="card-body">
-                <h5 class="card-title">Light card title</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  <a class="stretched-link" href="{% url 'question:detail' q.id %}">{{q.summary}}</a>
                 </p>
               </div>
             </div>
+            {% endfor %}
           </div>
           <div
             class="tab-pane fade"
@@ -94,19 +104,36 @@
             role="tabpanel"
             aria-labelledby="list-messages-list"
           >
-            ...
-          </div>
+          {% for a in Answer %}
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+              <div class="card-body">
+                <p class="card-text">
+                  <a class="stretched-link" href="{% url 'question:detail' a.question_id %}">{{a.content}}</a>
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+        
           <div
             class="tab-pane fade"
             id="list-settings"
             role="tabpanel"
             aria-labelledby="list-settings-list"
           >
-            ...
+          {% for v in vQuestion %}
+          <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-body">
+              <p class="card-text">
+                <a class="stretched-link" href="{% url 'vote:detail' v.id %}">{{v.title}}</a>
+              </p>
+            </div>
           </div>
+          {% endfor %}
+        </div>
         </div>
       </div>
     </div>
   </div>
+  {% endblock %}
 </div>
-{% endblock %}

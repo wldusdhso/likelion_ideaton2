@@ -1,11 +1,15 @@
 {% extends 'base.html' %} {% block content %}
 
 <h2>Vote Board</h2>
+{% if user.is_authenticated %}
 <div align="right">
   <button type="button" class="btn btn-outline-dark">
     <a href="{% url 'vote:create' %}">create</a>
   </button>
 </div>
+{% else %}
+{% endif %}
+
 {% if question_list %}
   <table class="table table-striped">
     <thead class="thead-dark">

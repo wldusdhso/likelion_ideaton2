@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils import timezone
 import datetime
+from django.conf import settings
 
 # Create your models here.
 class Question(models.Model):
-    writer = models.CharField(max_length=20)
+    writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="vquestion")
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField()
     status = models.CharField(max_length=1, default='S') #투표전(S) 투표중(R) 투표마감(F)
