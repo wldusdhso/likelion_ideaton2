@@ -20,7 +20,6 @@ def mypage(request, profile_name):
 
 def register(request):
     if request.method=='POST':
-<<<<<<< HEAD
         if request.POST['password']==request.POST['password2']:
             new_user = User.objects.create_user(username=request.POST['username'], password=request.POST['password'])
             
@@ -48,8 +47,3 @@ def logout(request):
     return redirect('main:home')
 
     
-=======
-        return redirect('/')        
-    else:
-        return render(request, 'register.html')  
->>>>>>> master
