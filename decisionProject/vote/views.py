@@ -29,16 +29,18 @@ def create(request):
             new_choice.question = new_question
             new_choice.text = request.POST[text]
             new_choice.save()
-        return redirect('vote_list')
+        return redirect('vote:vote_list')
     else :
         return render(request, 'create.html')
 
 def add_vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    question.total_votes += 1
     selected_choice = question.choice_set.get(pk=request.POST['choice'])
     selected_choice.votes += 1
     selected_choice.save()
-    return redirect('detail', question_id)
+    question.save()
+    return redirect('vote:detail', question_id)
 
 def update(request, question_id):
     if request.method =='POST':
@@ -62,7 +64,7 @@ def update(request, question_id):
             new_choice.text = request.POST[text]
             new_choice.save()
 
-        return redirect('vote_list')
+        return redirect('vote:vote_list')
     else :
         question = get_object_or_404(Question, pk=question_id)
         return render(request, 'update.html', {'question': question})
@@ -70,11 +72,11 @@ def update(request, question_id):
 def delete(request, question_id):
     del_question = get_object_or_404(Question, pk=question_id)
     del_question.delete()
-    return redirect('vote_list')
+    return redirect('vote:vote_list')
 
 def delete_choice(request, question_id, choice_id):
     question = get_object_or_404(Question, pk=question_id)
     deleted_choice = question.choice_set.get(pk=choice_id)
     delete_choice.delete()
     question.save()
-    return redirect('')
+    return redirect('/')
