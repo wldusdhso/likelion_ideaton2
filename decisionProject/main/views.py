@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from vote.models import Question as vQuestion
 from question.models import Question, Answer
 from django.contrib.auth.models import User
-from vote.models import Question
+from decision.models import Decision
 from django.contrib import auth
 
 # Create your views here.
@@ -28,7 +28,9 @@ def home(request):
     })
 
 def mypage(request, profile_name):
-    return render(request, 'mypage.html')
+    user = User.objects.get(username=profile_name)
+    user_decisions = Decision.objects.filter(maker=user)
+    return render(request, 'mypage.html', {'user':user, 'decisions': user_decisions})
     
 
 def register(request):
