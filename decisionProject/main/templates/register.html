@@ -1,4 +1,7 @@
-<form action>
+{% extends 'base.html' %} {% block content %}
+
+<form action="{% url 'main:register' %}" method="POST">
+    {% csrf_token %}
     <p>username <input type="text" name="username" required="required"></p>
     <p>E-mail <input type="email" name="email" required="required"></p>
     <p>pw <input type="password" name="password" required="required"></p>
@@ -7,4 +10,4 @@
     <button type="submit">dd</button>
     
 </form>
-
+{% endblock %}
