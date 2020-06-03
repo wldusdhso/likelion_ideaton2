@@ -64,32 +64,28 @@
       <input
         type="text"
         class="form-control"
-        name="writer"
         aria-label="Username"
         aria-describedby="basic-addon1"
+        value="{{user.username}}"
+        readonly
       />
     </div>
-
-    <input
-      type="text"
-      class="form-control"
-      name="writer"
-      aria-label="Username"
-      aria-describedby="basic-addon1"
-      value="{{user.username}}"
-      readonly
-    />
-  </div>
-
+    
   <hr />
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">Choice</span>
-
+      <input
+      type="text"
+      id="input_choice"
+      aria-label="Username"
+      aria-describedby="basic-addon1"
+    />
       <button type="button" class="btn btn-outline-secondary" id="add_btn">
         ADD
       </button>
 
+    </div>
     </div>
     <input type="hidden" id="count" name="count" value="0" />
   
