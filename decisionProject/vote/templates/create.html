@@ -41,18 +41,33 @@
     }
   }
 </script>
-<h1>결정장애를 위한 웹서비스입니다.</h1>
-
+<br>
 <form method="POST" enctype='multipart/form-data' onsubmit="givenum()">
     {%csrf_token%}
-    제목 : <input type="text" name="title" /> <br />
-    작성자 : <input type="text" name="writer" /> <br />
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">제목</span>
+      </div>
+      <input type="text" class="form-control"  name="title" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">작성자</span>
+      </div>
+      <input type="text" class="form-control"  name="writer" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
 
     <hr />
-    choice : <input type="text" id="input_choice" />
-    <button type="button" id="add_btn">ADD</button>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Choice</span>
+      </div>
+      <input type="text" class="form-control" id="input_choice" name="writer" aria-label="Username" aria-describedby="basic-addon1">
+      <button type="button" class="btn btn-outline-secondary" id="add_btn">ADD</button>
+    </div>
     <input type="hidden" id="count" name="count" value="0">
-    <br /><br />
+
     <div id="choice_area"></div>
     <hr />
 

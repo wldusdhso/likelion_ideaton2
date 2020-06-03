@@ -1,14 +1,30 @@
 {% extends 'base.html' %} {% block content %}
 
 <h2>Vote Board</h2>
-<a href="{% url 'create' %}">create</a>
+<div align="right"><button type="button" class="btn btn-outline-dark"><a href="{% url 'create' %}">create</a></button></div>
 {% if question_list %}
-    <ul>
+    <ul class="list-group list-group-flush">
+    
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Writer</th>
+    </tr>
+</thead>
+<tbody>
     {% for question in question_list %}
-        <li><a href="{%url 'detail' question.id%}">{{ question.title }}</a>
-        </li>
+        <tr onclick="location.href=`{%url 'detail' question.id%}`" style="cursor:pointer;">
+            <a href="{%url 'detail' question.id%}">
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ question.title }}</td>
+                <td>{{ question.writer }}</td>
+            </a>
+        </tr>
     {% endfor %}
-    </ul>
+</tbody>
+</table>
 {% else %}
     <p>No vote.</p>
 {% endif %}
