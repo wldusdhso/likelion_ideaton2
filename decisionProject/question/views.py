@@ -44,7 +44,7 @@ def update(request,question_id):
 def delete(request,question_id):
     delete_question = get_object_or_404(Question,pk = question_id)
     delete_question.delete()
-    return redirect ('list')
+    return redirect ('question:list')
 
 
 def create_answer(request, question_id):
@@ -56,7 +56,7 @@ def create_answer(request, question_id):
     new_answer.save()
 
     print('create test')
-    return redirect('detail',question_id) 
+    return redirect('question:detail',question_id) 
     
 
 def edit_answer(request,answer_id):
@@ -70,4 +70,4 @@ def update_answer(request,answer_id):
     edit_answer.pub_date = timezone.datetime.now()
     question_id = edit_answer.question_id
     edit_answer.save()
-    return redirect('detail',question_id) 
+    return redirect('question:detail',question_id) 
