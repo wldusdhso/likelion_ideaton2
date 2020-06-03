@@ -58,3 +58,4 @@ def logout(request):
     auth.logout(request)
     print('logout 실행')
     return redirect('main:home')
+

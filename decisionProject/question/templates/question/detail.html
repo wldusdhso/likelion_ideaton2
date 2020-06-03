@@ -69,7 +69,7 @@
             <summary>댓글작성</summary>
             <form action = "{% url 'question:create_answer' question.id %}" method="POST">
                 {% csrf_token %}
-            <p>작성자 : <input type="text" name="writer"></p>
+            <p>작성자 : {{request.user}}</p>
             <p> 내용 : <textarea name ="content" id="" cols="30" rows="10"></textarea></p>
             <button type = "submit">답변</button>
             </form>
@@ -94,7 +94,7 @@
                 <hr>
                 <form action = "{% url 'question:update_answer' ans.id %}" method="POST">
                     {% csrf_token %}
-                <p>작성자 ID : <input type="text" name="writer" value="{{ans.writer}}"></p>
+                <p>작성자 ID : {{request.user}}</p>
                 <p> 내용 : <textarea name ="content" id="" cols="30" rows="10">{{ans.content}}</textarea></p>
                 <button type = "submit">답변수정</button>
                 </form>
