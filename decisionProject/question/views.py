@@ -7,15 +7,15 @@ from django.utils import timezone
 
 def question_list(request):
     questions = Question.objects.all()
-    return render(request,'list.html',{'questions':questions})
+    return render(request,'question/list.html',{'questions':questions})
 
 def new(request):
-    return render(request,'new.html')
+    return render(request,'question/new.html')
 
 def create(request):
     new_question = Question()
     new_question.title = request.POST['title']
-    new_question.writer = request.POST['writer']
+    new_question.writer = request.user.username
     new_question.content = request.POST['content']
     new_question.pub_date = timezone.datetime.now()
     new_question.save()
@@ -26,16 +26,16 @@ def detail(request,question_id):
 
     answer = Answer.objects.filter(question_id=question_id)
     print(answer)
-    return render(request, 'detail.html',{'question':question, 'answer':answer,'edit_answer':edit_answer})
+    return render(request, 'question/detail.html',{'question':question, 'answer':answer,'edit_answer':edit_answer})
 
 def edit(request,question_id):    
     question = get_object_or_404(Question,pk = question_id)
-    return render(request,'edit.html',{'question':question})
+    return render(request,'question/edit.html',{'question':question})
 
 def update(request,question_id):
     edit_question = get_object_or_404(Question,pk = question_id)
     edit_question.title = request.POST['title']
-    edit_question.writer = request.POST['writer']
+    edit_question.writer = request.user.username
     edit_question.content = request.POST['content']
     edit_question.pub_date = timezone.datetime.now()
     edit_question.save()
@@ -61,7 +61,7 @@ def create_answer(request, question_id):
 
 def edit_answer(request,answer_id):
     answer = get_object_or_404(Answer,pk = answer_id)
-    return render('update_answer')
+    return render(request, 'question/update_answer.html')
 
 def update_answer(request,answer_id):
     edit_answer = get_object_or_404(Answer,pk = answer_id)

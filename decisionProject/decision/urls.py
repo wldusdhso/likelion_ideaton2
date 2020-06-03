@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-import decision.views
+
+app_name='decision'
 
 app_name='decision'
 

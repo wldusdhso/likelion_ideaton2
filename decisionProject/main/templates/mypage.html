@@ -1,0 +1,103 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>My Page</h1>
+<hr />
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card text-center" style="width: 18rem;">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAM1BMVEXk5ueutLfm6OmrsbSvtbji5OXJzc+2u77d4OHS1dfLz9GyuLu/xMbZ3N3W2dvFycu7wMLi5w9NAAAFFUlEQVR4nO2d23ajMAxFbXExtwD//7WDIZnQljZgS+GYaD/2KXvJloTBqjGKoiiKoiiKoiiKoiiKoiiKoiiKoiiKoiiKoiiK8qHQf87+JQLMWre+numr4lqek0txK0drsyfWDXV1EUmiqnGTnP2Gt2yq9B3J1O6n3dPSNSZpRzJN/qveXdIORbKORI194bcEckg0jlS/it/TsUlwP1Ix7vSbHdsqNUXq9+stjk1SikTDgQDeFbuEdiMZd1jQr9RkkioV+XG/mUQ2I1Whgja7paBIVaifV+zxFaMEU4giFW2Uoc3R9yK5OEFr27MV/iagDn4nG5GDSHW0IHh3UzAIToq4WzF+Ey60qIYsa9STDaiKPH4Wdp1SxxTCCch8SjxpZgGye6OOT9Bah2dIFWMIIftTzl3oAdyJrH6A6ZQa3hDi1USudmYFliFznvFkNZQilfyGWMuUIp/sN4EyNOwhBCuJbE8VXwxLJMP4w4sNkIq+QK2YyM/WWkESIURqawSq4WyIUxFFEg3UoZtAvZ/pcAxZH36f4DwG06iGYeC8wpAph1NBLM42eyDSd3tgDI0aJm94/VX6AZnm+tXi+hX/+l3b9TtvoacnnIMaul39Cfj6pxifcBIlkkxxUuknnAgzfQz1zRDpVF+k986QBEVqPk6991z/DanAMsVapJ/wpYIpeAWhGpoF7i+GkMr9AvdXX2B5xsP7oI8XQuYgQn59yfoyH+kV/gq+dIqXSBfYaiJeLXzA9SCcowpyJRvMNLPAcysIdo16ODobxFK4Jnor5uBXusNvOT8ALRRPYm/JAmeZB1EH4IgN90/odukIesIXaiKC84XukKkR8Ne4V1BAXczGZMZizBzubrIytSE8VB2Zb5K1UEf4+yCq90yJmv3SC+ACmeH3QWZrwS6tHbiGiuFVHLOsSyiFbkCm+XMiXVsWaS7QFUS3od2SnPSGW/J6M0RU1Z1bD4bMrOuaq0yGnJmHeVa3ui4nmrqvrjXd8wHRVUe00h+c/dsiWSSKaXU2w9CNzrVtnudt65zruqFp+irhYbSLWl12rr1nmJ+p1P8xb8eh6QuTluc8MrhZkueelmaidWVdmSQs/Y/sN6fqvvZsO/jRwr4ilOO+yP2i2Q41bJNDvnk5HruNWI6Qkjx6/y0dmOSUNsvN1jNC0o69QZEk6kdevbtkizHum0wdcrC2z9E/O57sOC3PvUcVgZJjf6Yj0ctHeAZHV5/lSKaU2H5bjqc8KNP+geQMjiec5dAtZNxzhGP53henVDB/p7dDsX1jypkK4PsW6MrxbUv12MR8TkX7nvenVJ+itziO8rsx5L0Zp2Iu/RKVivem0A1H2YEnU4o5188K/w8FoZuUBxH8Hwoy864CyIUUz80xXxF5Y0wnVcFNJD68gRK0Ap/eoAmyRxFOkPsCJlKSecLYiLNfTOOBr2hgFPoNuL6XjvwmVpCM6SKt2ASheHg+uMXMMnc4rg9RDyzIsxWhBRkGL0CvUU/sOgVfo57IdQqcRx/E5VPQZuYrcWNszj+WeU3M2VQSIYwLYgohjAkibMf9neD/8SU18JGd0HSaQC18EHh9X2oaogChjU0yIQzsThNapIE3+BNapIHLlM7+1UcIKYlC8yylCDixSabc3wkwTGkbBm3EZBqahYC2RmboqhjHK6LQv46R43CqSareew4f16SWSo/Pb5ca0S1GdtTQGJip/ftI7OcqiqIoiqIoiqIoiqJ8Hv8A8nNPqdUhBycAAAAASUVORK5CYII="
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">Username</h5>
+        <p class="card-text">
+          유저 소개 글
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-4">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a
+            class="list-group-item list-group-item-action active"
+            id="list-home-list"
+            data-toggle="list"
+            href="#list-home"
+            role="tab"
+            aria-controls="home"
+            >나의 투표</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-profile-list"
+            data-toggle="list"
+            href="#list-profile"
+            role="tab"
+            aria-controls="profile"
+            >나의 질문</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-messages-list"
+            data-toggle="list"
+            href="#list-messages"
+            role="tab"
+            aria-controls="messages"
+            >나의 답변</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-settings-list"
+            data-toggle="list"
+            href="#list-settings"
+            role="tab"
+            aria-controls="settings"
+            >Settings</a
+          >
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+          <div
+            class="tab-pane fade show active"
+            id="list-home"
+            role="tabpanel"
+            aria-labelledby="list-home-list"
+          >
+            dsd
+          </div>
+          <div
+            class="tab-pane fade"
+            id="list-profile"
+            role="tabpanel"
+            aria-labelledby="list-profile-list"
+          >
+            ...
+          </div>
+          <div
+            class="tab-pane fade"
+            id="list-messages"
+            role="tabpanel"
+            aria-labelledby="list-messages-list"
+          >
+            ...
+          </div>
+          <div
+            class="tab-pane fade"
+            id="list-settings"
+            role="tabpanel"
+            aria-labelledby="list-settings-list"
+          >
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
