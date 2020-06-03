@@ -1,17 +1,37 @@
 {% extends 'base.html' %} {% block content %}
 
 <h2>Vote Board</h2>
-<a href="{% url 'create' %}">create</a>
+<div align="right">
+  <button type="button" class="btn btn-outline-dark">
+    <a href="{% url 'create' %}">create</a>
+  </button>
+</div>
 {% if question_list %}
-    <ul>
-    {% for question in question_list %}
-        <li><a href="{%url 'detail' question.id%}">{{ question.title }}</a>
-            <a href="{%url 'update' question.id%}">수정</a>
-            <a href="{%url 'delete' question.id%}">삭제</a>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No vote.</p>
-{% endif %}
-{% endblock %}
+<ul class="list-group list-group-flush">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Writer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for question in question_list %}
+      <tr
+        onclick="location.href=`{%url 'detail' question.id%}`"
+        style="cursor: pointer;"
+      >
+        <a href="{%url 'detail' question.id%}">
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{ question.title }}</td>
+          <td>{{ question.writer }}</td>
+        </a>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No vote.</p>
+  {% endif %} {% endblock %}
+</ul>

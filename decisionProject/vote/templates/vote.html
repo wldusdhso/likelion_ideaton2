@@ -1,11 +1,20 @@
+{% extends 'base.html' %} {% block content %}
 <h1>{{ question.title }}</h1>
 
 <form action="{% url 'add_vote' question.id %}" method="post">
     {% csrf_token %}
-    {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}">
-        <label for="choice{{forloop.counter}}">{{choice.text}}</label>
-        <br>
+    <br>
+    {% for choice in question.choice_set.all %}   
+    <div class="input-group">   
+        <div class="input-group-prepend">       
+            <div class="input-group-text">
+               <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}" aria-label="Radio button for following text input">
+            </div>
+        </div>
+        <label class="form-control" for="choice{{forloop.counter}}">{{choice.text}}</label>
+    </div>
     {% endfor %}
-    <input type="submit" value="Vote">
+    <br>
+    <input type="submit" class="btn btn-outline-dark" value="Vote">
 </form>
+{% endblock %}
