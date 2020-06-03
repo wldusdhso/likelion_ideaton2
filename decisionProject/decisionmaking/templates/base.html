@@ -62,9 +62,19 @@
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">로그인</a>
-          </li>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:logout' %}">로그아웃</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:login' %}">로그인</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:register' %}">회원가입</a>
+            </li>
+          {% endif %}
+          
         </ul>
       </div>
     </nav>
