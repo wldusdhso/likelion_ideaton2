@@ -6,8 +6,8 @@
 <div class="container">
     <div class= "row">
         <div class="col">
-            {% if hotQuestions %}
-            <h3>!!HOT QUESTION!!</h3>
+            <h3>!!HOT VOTES!!</h3>
+            {% if hotVotes %}
             <table class="table">
                 <thead>
                 <tr>
@@ -17,15 +17,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for hotq in hotQuestions %}
+                {% for hotv in hotVotes %}
                 <tr
-                    onclick="location.href=`{%url 'vote:detail' hotq.id%}`"
+                    onclick="location.href=`{%url 'vote:detail' hotv.id%}`"
                     style="cursor: pointer;"
                 >
-                    <a href="{%url 'vote:detail' hotq.id%}">
+                    <a href="{%url 'vote:detail' hotv.id%}">
                     <th scope="row">{{forloop.counter}}</th>
-                    <td>{{ hotq.title }}</td>
-                    <td>{{ hotq.total_votes }}</td>
+                    <td>{{ hotv.title }}</td>
+                    <td>{{ hotv.total_votes }}</td>
                     </a>
                 </tr>
                 {% endfor %}
@@ -36,8 +36,73 @@
             {% endif %}
         </div>
         <div class="col">
-            <h3>!!LATEST QUESTION!!</h3>
+            <h3>!!HOT QUESTION!!</h3>
             {% if hotQuestions %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Top</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Comments</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for hotq, count in hotQuestions %}
+                <tr
+                    onclick="location.href=`{%url 'vote:detail' hotq.id%}`"
+                    style="cursor: pointer;"
+                >
+                
+                    <a href="{%url 'vote:detail' hotq.id%}">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ hotq.title }}</td>
+                    <td>{{ count }}</td>
+                    </a>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No vote.</p>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <h3>!!LATEST VOTES!!</h3>
+            {% if latestVotes %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">DATE</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for latv in latestVotes %}
+                <tr
+                    onclick="location.href=`{%url 'vote:detail' latv.id%}`"
+                    style="cursor: pointer;"
+                >
+                    <a href="{%url 'vote:detail' latv.id%}">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ latv.title }}</td>
+                    <td>{{ latv.pub_date }}</td>
+                    </a>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No vote.</p>
+            {% endif %}
+        </div>
+
+        <div class="col">
+            <h3>!!LATEST QUESTION!!</h3>
+            {% if latestQuestions %}
             <table class="table">
                 <thead>
                 <tr>
