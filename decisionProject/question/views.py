@@ -5,7 +5,7 @@ from django.utils import timezone
 
 # Create your views here.
 
-def list(request):
+def question_list(request):
     questions = Question.objects.all()
     return render(request,'list.html',{'questions':questions})
 
