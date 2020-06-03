@@ -1,4 +1,17 @@
-{% extends 'base.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail</title>
+  <style>
+    #seven{
+        background-color: rgb(235, 209, 228);
+    }
+</style>
+</head>
+<body id="seven">
+    {% extends 'base.html' %} {% block content %}
 
 <h1>{{ question.title }}</h1>
 
@@ -8,14 +21,16 @@
 {% else %}
 {% endif %}
 
-<ul class="list-group list-group-flush">
-{% for choice in question.choice_set.all %}
-    <li class="list-group-item">{{ choice.text }} ----- {{ choice.votes }}</li>
-{% endfor %}
-</ul>
-<br>
+    <ul class="list-group list-group-flush">
+    {% for choice in question.choice_set.all %}
+        <li class="list-group-item">{{ choice.text }} ----- {{ choice.votes }}</li>
+    {% endfor %}
+    </ul>
+    <br>
 
-<button type="button" class="btn btn-outline-dark"><a href="{% url 'vote:vote_list' %}">Home</a></button>
-<button type="button" class="btn btn-outline-dark"><a href="{% url 'vote:vote' question.id %}">Vote</a></button>
+    <button type="button" class="btn btn-outline-dark"><a href="{% url 'vote:vote_list' %}">Home</a></button>
+    <button type="button" class="btn btn-outline-dark"><a href="{% url 'vote:vote' question.id %}">Vote</a></button>
 
-{% endblock %}
+    {% endblock %}
+</body>
+</html>

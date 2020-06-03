@@ -35,7 +35,7 @@ def edit(request,question_id):
 def update(request,question_id):
     edit_question = get_object_or_404(Question,pk = question_id)
     edit_question.title = request.POST['title']
-    edit_question.writer = request.POST['writer']
+    edit_question.writer = request.user.username
     edit_question.content = request.POST['content']
     edit_question.pub_date = timezone.datetime.now()
     edit_question.save()

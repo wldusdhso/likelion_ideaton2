@@ -28,6 +28,7 @@ def home(request):
     })
 
 def mypage(request, profile_name):
+
     me = User.objects.get(username=profile_name)
     vQuestion = me.vquestion.all()
     Question = me.question_set.all()
@@ -39,12 +40,12 @@ def mypage(request, profile_name):
         'Answer' : Answer,
         'Decision' : Decision
     })
-    
+
 
 def register(request):
     if request.method=='POST':
         if request.POST['password']==request.POST['password2']:
-            new_user = User.objects.create_user(username=request.POST['username'], password=request.POST['password'])
+            new_user = User.objects.create_user(username=request.POST['username'], password=request.POST['password'], email=request.POST['email'])
             
             auth.login(request, new_user)
 

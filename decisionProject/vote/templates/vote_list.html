@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block content %}
 
+{% extends 'base.html' %} {% block content %}
 <h2>Vote Board</h2>
 {% if user.is_authenticated %}
 <div align="right">
@@ -37,3 +37,4 @@
   {% else %}
   <p>No vote.</p>
   {% endif %} {% endblock %}
+ 
