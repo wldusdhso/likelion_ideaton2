@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from vote.models import Question
 
+from vote.models import Question
+from django.contrib import auth
 # Create your views here.
 def home(request):
     hotQuestions = Question.objects.order_by('-total_votes')[:5]
@@ -9,3 +10,11 @@ def home(request):
         'hotQuestions' : hotQuestions,
         'latestQuestions' : latestQuestions,
     })
+
+def register(request):
+    if request.method=='POST':
+        
+    else:
+        return render(request, 'register.html')  
+
+   
