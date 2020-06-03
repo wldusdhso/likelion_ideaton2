@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <h1>{{ question.title }}</h1>
 
-<form action="{% url 'add_vote' question.id %}" method="post">
+<form action="{% url 'vote:add_vote' question.id %}" method="post">
     {% csrf_token %}
     <br>
     {% for choice in question.choice_set.all %}   
