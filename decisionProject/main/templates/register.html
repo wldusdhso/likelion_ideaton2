@@ -15,12 +15,43 @@
 
 <form action="{% url 'main:register' %}" method="POST">
     {% csrf_token %}
-    <p>username <input type="text" name="username" required="required"></p>
+    <br>
+    <br>
+    <br>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"name="username" required="required">
+      </div>
+      <br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"></span>
+        </div>
+        <input type="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1"name="email" required="required">
+      </div>
+      <br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"></span>
+        </div>
+        <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"name="password" required="required">
+      </div>
+      <br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"></span>
+        </div>
+        <input type="password" class="form-control" placeholder="Re-password" aria-label="Password" aria-describedby="basic-addon1"name="password2" required="required">
+      </div>
+      <br>
+    <!-- <p>username <input type="text" name="username" required="required"></p>
     <p>E-mail <input type="email" name="email" required="required"></p>
     <p>pw <input type="password" name="password" required="required"></p>
-    <p>re-pw<input type="password" name="password2" required="required"></p>
-
-    <button type="submit">dd</button>
+    <p>re-pw<input type="password" name="password2" required="required"></p> -->
+    <button type="submit" class=" btn pull-right form-control btn-outline-secondary">회원가입</button>
+   
     
 </form>
 {% endblock %}
