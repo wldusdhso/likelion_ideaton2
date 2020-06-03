@@ -7,10 +7,10 @@ from django.utils import timezone
 
 def list(request):
     questions = Question.objects.all()
-    return render(request,'list.html',{'questions':questions})
+    return render(request,'question/list.html',{'questions':questions})
 
 def new(request):
-    return render(request,'new.html')
+    return render(request,'question/new.html')
 
 def create(request):
     new_question = Question()
@@ -26,11 +26,11 @@ def detail(request,question_id):
 
     answer = Answer.objects.filter(question_id=question_id)
     print(answer)
-    return render(request, 'detail.html',{'question':question, 'answer':answer,'edit_answer':edit_answer})
+    return render(request, 'question/detail.html',{'question':question, 'answer':answer,'edit_answer':edit_answer})
 
 def edit(request,question_id):    
     question = get_object_or_404(Question,pk = question_id)
-    return render(request,'edit.html',{'question':question})
+    return render(request,'question/edit.html',{'question':question})
 
 def update(request,question_id):
     edit_question = get_object_or_404(Question,pk = question_id)
@@ -61,7 +61,7 @@ def create_answer(request, question_id):
 
 def edit_answer(request,answer_id):
     answer = get_object_or_404(Answer,pk = answer_id)
-    return render('update_answer')
+    return render(request, 'question/update_answer.html')
 
 def update_answer(request,answer_id):
     edit_answer = get_object_or_404(Answer,pk = answer_id)
