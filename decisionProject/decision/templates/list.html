@@ -3,13 +3,11 @@
 <h2>Decision Page</h2>
 
 <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {{form.as_table}}
-    </table>
-    <a href="{%url 'result' %}">결과확인</a>
-
+  {% csrf_token %}
+  <table>
+    {{form.as_table}}
+  </table>
+  <a href="{%url 'decision:result' %}">결과확인</a>
 </form>
-
 
 {% endblock %}

@@ -7,9 +7,6 @@ app_name = 'question'
 
 
 
-
-
-
 urlpatterns = [
     path('', views.list, name="list"),
     path('new/', views.new, name="new"),
