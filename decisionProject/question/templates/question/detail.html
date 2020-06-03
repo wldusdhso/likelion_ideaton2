@@ -55,11 +55,14 @@
     <hr align="left" style="black; width: 65%;">
     <h4>{{question.content}}</h4>
    <br>
+   {% if user.username == question.writer %}
         <h5 id="four"><a href = "{% url 'question:edit' question.id %}">edit </a>
         
         <a href = "{% url 'question:delete' question.id %}"> delete </a>
       
         </h5>
+        {%else%}
+        {%endif%}
         <br>
 </div> 
         <hr>
