@@ -15,7 +15,7 @@ def new(request):
 def create(request):
     new_question = Question()
     new_question.title = request.POST['title']
-    new_question.writer = request.user.username
+    new_question.writer = request.user
     new_question.content = request.POST['content']
     new_question.pub_date = timezone.datetime.now()
     new_question.save()

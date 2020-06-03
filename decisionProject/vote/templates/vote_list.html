@@ -1,41 +1,40 @@
 
-    {% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
+<h2>Vote Board</h2>
+{% if user.is_authenticated %}
+<div align="right">
+  <button type="button" class="btn btn-outline-dark">
+    <a href="{% url 'vote:create' %}">create</a>
+  </button>
+</div>
+{% else %}
+{% endif %}
 
-    <h2>Vote Board</h2>
-    <div align="right">
-      <button type="button" class="btn btn-outline-dark">
-        <a href="{% url 'vote:create' %}">create</a>
-      </button>
-    </div>
-    {% if question_list %}
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Writer</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for question in question_list %}
-          <tr
-            onclick="location.href=`{%url 'vote:detail' question.id%}`"
-            style="cursor: pointer;"
-          >
-            <a href="{%url 'vote:detail' question.id%}">
-              <th scope="row">{{forloop.counter}}</th>
-              <td>{{ question.title }}</td>
-              <td>{{ question.writer }}</td>
-            </a>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      {% else %}
-      <p>No vote.</p>
-      {% endif %} 
+{% if question_list %}
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Writer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for question in question_list %}
+      <tr
+        onclick="location.href=`{%url 'vote:detail' question.id%}`"
+        style="cursor: pointer;"
+      >
+        <a href="{%url 'vote:detail' question.id%}">
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{ question.title }}</td>
+          <td>{{ question.writer }}</td>
+        </a>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No vote.</p>
+  {% endif %} {% endblock %}
  
-      {% endblock %}
-
-
-

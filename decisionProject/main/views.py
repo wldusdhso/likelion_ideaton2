@@ -28,10 +28,19 @@ def home(request):
     })
 
 def mypage(request, profile_name):
-    user = User.objects.get(username=profile_name)
-    user_decisions = Decision.objects.filter(maker=user)
-    return render(request, 'mypage.html', {'user':user, 'decisions': user_decisions})
-    
+
+    me = User.objects.get(username=profile_name)
+    vQuestion = me.vquestion.all()
+    Question = me.question_set.all()
+    Answer = me.answer_set.all()
+    Decision = me.decision_set.all()
+    return render(request, 'mypage.html', {
+        'vQuestion' : vQuestion,
+        'Question' : Question,
+        'Answer' : Answer,
+        'Decision' : Decision
+    })
+
 
 def register(request):
     if request.method=='POST':

@@ -1,10 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
 class Question(models.Model):
     title = models.CharField(max_length=20)
-    writer = models.CharField(max_length=10, default="")
+    writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField() 
     pub_date = models.DateTimeField()
 
@@ -17,5 +18,5 @@ class Question(models.Model):
 class Answer(models.Model):
     content = models.TextField()
     pub_date = models.DateTimeField()
-    writer = models.CharField(max_length=10, default="")
+    writer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     question_id = models.IntegerField(default=0)

@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create</title>
-  <style>
-    #seven{
-        background-color: rgb(235, 209, 228);
-    }
-</style>
-</head>
-<body id="seven">
-  {% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 
   <script type="text/javascript">
     window.onload = function () {
@@ -82,22 +69,27 @@
         aria-describedby="basic-addon1"
       />
     </div>
-  
-    <hr />
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Choice</span>
-      </div>
-      <input
-        type="text"
-        class="form-control"
-        id="input_choice"
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-      />
+
+    <input
+      type="text"
+      class="form-control"
+      name="writer"
+      aria-label="Username"
+      aria-describedby="basic-addon1"
+      value="{{user.username}}"
+      readonly
+    />
+  </div>
+
+  <hr />
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Choice</span>
+
       <button type="button" class="btn btn-outline-secondary" id="add_btn">
         ADD
       </button>
+
     </div>
     <input type="hidden" id="count" name="count" value="0" />
   
