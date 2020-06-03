@@ -46,19 +46,21 @@ def update(request, question_id):
         upd_question.title = request.POST['title']
         upd_question.pub_date = timezone.now()
         upd_question.writer = request.POST['writer']
+        
+        choice_set = upd_question.choice_set.all()
+        for elem in choice_set:
+            elem.delete()
+
         upd_question.save()
 
+        # print(request.POST['count'])
+
         for i in range(int(request.POST['count'])):
-            try:
-                upd_choice = upd_question.choice_set.get(pk=request.POST['choice'])
-            except (Choice.DoesNotExist):
-                upd_choice = Choice()
-            else:
-                text = 'text'+str(i)
-                upd_choice.question = upd_question
-                upd_choice.text = request.POST[text]
-                upd_choice.save()
-                upd_question.choice_set = new_choice_set
+            new_choice = Choice()
+            text = 'text'+str(i)
+            new_choice.question = upd_question
+            new_choice.text = request.POST[text]
+            new_choice.save()
 
         return redirect('vote_list')
     else :

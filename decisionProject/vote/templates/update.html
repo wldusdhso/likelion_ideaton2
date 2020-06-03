@@ -1,98 +1,91 @@
-  
 {% extends 'base.html' %} {% block content %}
 
 <script type="text/javascript">
-    // function add_choice(){
-    //   console.log("test start!");
-    //   var num_of_count = document.getElementById("count");
-    //   var choice_area = document.getElementById("choice_area");
+  window.onload = function () {
+    var add_btn = document.getElementById("add_btn");
+    var num_of_count = document.getElementById("count");
+    var choice_area = document.getElementById("choice_area");
+    console.log(num_of_count.value);
 
-    //   var element = document.createElement("p");
-    //   element.innerHTML = document.getElementById("input_choice").value;
-    //   choice_area.appendChild(element);
+    add_btn.onclick = function () {
+      var element = document.createElement("p");
+      var input_data = document.getElementById("input_choice");
+      element.innerHTML = input_data.value;
+      choice_area.appendChild(element);
 
-    //   var rem_btn = document.createElement("button");
-    //   rem_btn.type = "button";
-    //   rem_btn.addEventListener('click', function(){
-    //     choice_area.removeChild(element);
-    //     num_of_count.value = parseInt(num_of_count.value)-1;
-    //   });
-    //   rem_btn.innerHTML = 'DEL'
-    //   element.appendChild(rem_btn);
+      var rm_btn = document.createElement("button");
+      rm_btn.type = "button";
+      rm_btn.innerHTML = "DEL";
+      rm_btn.addEventListener("click", function () {
+        remove_choice(this);
+      });
 
-    //   var hidden_elem = document.createElement("input");
-    //   hidden_elem.type = "hidden";
-    //   hidden_elem.className = "hidden_elem"
-    //   hidden_elem.value = document.getElementById("input_choice").value;
-    //   element.appendChild(hidden_elem);
+      rm_btn.innerHTML = "DEL";
+      element.appendChild(rm_btn);
 
-    //   num_of_count.value = parseInt(num_of_count.value)+1;
-    // }
+      var hidden_elem = document.createElement("input");
+      hidden_elem.type = "hidden";
+      hidden_elem.className = "hidden_elem";
+      hidden_elem.value = document.getElementById("input_choice").value;
+      element.appendChild(hidden_elem);
 
-    window.onload = function () {
-      console.log("test start!");
-      var add_btn = document.getElementById("add_btn");
-      var rem_btn = document.getElementById("rem_btn");
-      var num_of_count = document.getElementById("count");
-      var choice_area = document.getElementById("choice_area");
-  
-      add_btn.onclick = function () {
-        var element = document.createElement("p");
-        element.innerHTML = document.getElementById("input_choice").value;
-        choice_area.appendChild(element);
-
-        var rem_btn = document.createElement("button");
-        rem_btn.type = "button";
-        rem_btn.innerHTML = 'DEL';
-        rem_btn.addEventListener('click', rem_choice);
-        element.appendChild(rem_btn);
-
-        var hidden_elem = document.createElement("input");
-        hidden_elem.type = "hidden";
-        hidden_elem.className = "hidden_elem"
-        hidden_elem.value = document.getElementById("input_choice").value;
-        element.appendChild(hidden_elem);
-
-        num_of_count.value = parseInt(num_of_count.value)+1;
-      };
-      
-      ////////////////////////
-      function rem_choice(){
-        choice_area.removeChild(element);
-        num_of_count.value = parseInt(num_of_count.value)-1;
-      }
-      ////////////////////////
+      num_of_count.value = parseInt(num_of_count.value) + 1;
+      console.log(num_of_count.value);
+      input_data.value = "";
     };
+  };
 
-    function givenum(){
-      var elem = document.getElementsByClassName('hidden_elem');
-      var num_of_count = document.getElementById("count");
-      for (var i=0; i<parseInt(num_of_count.value); i++){
-        elem[i].name = 'text'.concat(i);
-      }
+  function remove_choice(obj) {
+    var choice_area = document.getElementById("choice_area");
+    var num_of_count = document.getElementById("count");
+
+    choice_area.removeChild(obj.parentNode);
+    num_of_count.value = parseInt(num_of_count.value) - 1;
+    console.log(num_of_count.value);
+  }
+
+  function givenum() {
+    var elem = document.getElementsByClassName("hidden_elem");
+    var num_of_count = document.getElementById("count");
+    console.log(num_of_count.value);
+    for (var i = 0; i < parseInt(num_of_count.value); i++) {
+      elem[i].name = "text".concat(i);
     }
+  }
 </script>
-<h1>결정장애를 위한 웹서비스입니다.</h1>
 
-<form method="POST" enctype='multipart/form-data' onsubmit="givenum()">
-    {%csrf_token%}
-    제목 : <input type="text" name="title" value="{{question.title}}"/> <br />
-    작성자 : <input type="text" name="writer" value="{{question.writer}}"/> <br />
+<h1>수정 폼</h1>
 
-    <hr />
-    choice : <input type="text" id="input_choice" />
-    <button type="button" id="add_btn" onclick="add_choice()">ADD</button>
-    <input type="hidden" id="count" name="count" value="{{question.choice_set.count}}">
-    <br /><br />
-    <div id="choice_area">
-      {% for choice in question.choice_set.all %}
-      <p>{{choice.text}}<button type="button" onclick="rem_choice()">DEL</button>
-      <input type="hidden" class="hidden_elem" value="{{choice.text}}"></p>
-      {% endfor %}
-    </div>
-    <hr />
+<form method="POST" enctype="multipart/form-data" onsubmit="givenum()">
+  {%csrf_token%} 제목 :
+  <input type="text" name="title" value="{{question.title}}" /> <br />
+  작성자 : <input type="text" name="writer" value="{{question.writer}}" />
+  <br />
 
-    <button type="submit">제출</button>
+  <hr />
+  choice : <input type="text" id="input_choice" />
+  <button type="button" id="add_btn" onclick="add_choice()">ADD</button>
+  <input
+    type="hidden"
+    id="count"
+    name="count"
+    value="{{question.choice_set.count}}"
+  />
+  <br /><br />
+  <div id="choice_area">
+    {% for choice in question.choice_set.all %}
+    <p>
+      {{choice.text}}<button type="button" onclick="remove_choice(this)">
+        DEL
+      </button>
+      <input type="hidden" class="hidden_elem" value="{{choice.text}}" />
+    </p>
+
+    {% endfor %}
+  </div>
+  <hr />
+
+  <button type="submit">제출</button>
 </form>
 
 {% endblock %}

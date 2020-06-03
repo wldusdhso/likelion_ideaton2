@@ -1,62 +1,66 @@
-  
 {% extends 'base.html' %} {% block content %}
 
 <script type="text/javascript">
-    window.onload = function () {
-      console.log("test start!");
-      var add_btn = document.getElementById("add_btn");
-      var num_of_count = document.getElementById("count");
-      var choice_area = document.getElementById("choice_area");
-  
-      add_btn.onclick = function () {
-        var element = document.createElement("p");
-        element.innerHTML = document.getElementById("input_choice").value;
-        choice_area.appendChild(element);
-
-        var rem_btn = document.createElement("button");
-        rem_btn.type = "button";
-        rem_btn.addEventListener('click', function(){
-          choice_area.removeChild(element);
-          num_of_count.value = parseInt(num_of_count.value)-1;
-        });
-        rem_btn.innerHTML = 'DEL'
-        element.appendChild(rem_btn);
-
-        var hidden_elem = document.createElement("input");
-        hidden_elem.type = "hidden";
-        hidden_elem.className = "hidden_elem"
-        hidden_elem.value = document.getElementById("input_choice").value;
-        element.appendChild(hidden_elem);
-
-        num_of_count.value = parseInt(num_of_count.value)+1;
-      };
-      
-    };
-
-  function givenum(){
-    var elem = document.getElementsByClassName('hidden_elem');
+  window.onload = function () {
+    // console.log("test start!");
+    var add_btn = document.getElementById("add_btn");
     var num_of_count = document.getElementById("count");
-    for (var i=0; i<parseInt(num_of_count.value); i++){
-      elem[i].name = 'text'.concat(i);
+    var choice_area = document.getElementById("choice_area");
+
+    add_btn.onclick = function () {
+      var element = document.createElement("p");
+      element.innerHTML = document.getElementById("input_choice").value;
+      choice_area.appendChild(element);
+
+      var rm_btn = document.createElement("button");
+      rm_btn.type = "button";
+      rm_btn.addEventListener("click", function () {
+        choice_area.removeChild(element);
+        num_of_count.value = parseInt(num_of_count.value) - 1;
+      });
+
+      rm_btn.innerHTML = "DEL";
+      element.appendChild(rm_btn);
+
+      var hidden_elem = document.createElement("input");
+      hidden_elem.type = "hidden";
+      hidden_elem.className = "hidden_elem";
+      hidden_elem.value = document.getElementById("input_choice").value;
+      element.appendChild(hidden_elem);
+
+      num_of_count.value = parseInt(num_of_count.value) + 1;
+    };
+  };
+
+  function givenum() {
+    var elem = document.getElementsByClassName("hidden_elem");
+    var num_of_count = document.getElementById("count");
+    for (var i = 0; i < parseInt(num_of_count.value); i++) {
+      elem[i].name = "text".concat(i);
     }
   }
 </script>
-<h1>결정장애를 위한 웹서비스입니다.</h1>
 
-<form method="POST" enctype='multipart/form-data' onsubmit="givenum()">
-    {%csrf_token%}
-    제목 : <input type="text" name="title" /> <br />
-    작성자 : <input type="text" name="writer" /> <br />
+<h1>투표받을 결정을 작성해주세요</h1>
+<br />
 
-    <hr />
-    choice : <input type="text" id="input_choice" />
-    <button type="button" id="add_btn">ADD</button>
-    <input type="hidden" id="count" name="count" value="0">
-    <br /><br />
-    <div id="choice_area"></div>
-    <hr />
+<form method="POST" enctype="multipart/form-data" onsubmit="givenum()">
+  {%csrf_token%} 제목 : <input type="text" name="title" required="required" />
+  <br />
+  작성자 : <input type="text" name="writer" required="required" /> <br />
 
-    <button type="submit">제출</button>
+  <hr />
+
+  choice : <input type="text" id="input_choice" />
+  <button type="button" id="add_btn">ADD</button>
+
+  <input type="hidden" id="count" name="count" value="0" />
+  <br /><br />
+
+  <div id="choice_area"></div>
+  <hr />
+
+  <button type="submit">제출</button>
 </form>
 
 {% endblock %}
