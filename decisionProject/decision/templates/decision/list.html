@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>Decision Page</h2>
+<hr />
+<br />
+<form
+  action="{% url 'decision:result' %}"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %} 결정장애 내용 : <input type="text" name="content" />
+  <br />
+  <small style="color: crimson;">* Yes/No 대답으로 가능한 질문만 작성.</small>
+  <br /><br />
+  <button type="submit">결정해!</button>
+</form>
+
+<hr />
+<h3>후회스런 과거 나의 결정들..</h3>
+<br />
+{% for decision in decisions %} {% if decision.result %}
+<div
+  class="card text-white text-center bg-success mb-3"
+  style="max-width: 18rem;"
+>
+  <div class="card-header">YES!</div>
+  <div class="card-body">
+    <h5 class="card-title">{{decision.choice_content}}</h5>
+    <p class="card-text">
+      <a href="#" class="btn">DELETE</a>
+    </p>
+  </div>
+</div>
+{% else %}
+<div
+  class="card text-white text-center bg-secondary mb-3"
+  style="max-width: 18rem;"
+>
+  <div class="card-header">NO!</div>
+  <div class="card-body">
+    <h5 class="card-title">{{decision.choice_content}}</h5>
+    <p class="card-text">
+      <a href="{% url 'decision:delete' decision.id %}" class="btn">DELETE</a>
+    </p>
+  </div>
+</div>
+{% endif %} {% endfor %} {% endblock %}
