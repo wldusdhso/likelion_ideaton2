@@ -1,5 +1,69 @@
 {% extends 'base.html' %} {% block content %}
 
 <h1>결정장애를 위한 웹서비스입니다.</h1>
-
+<br>
+<div class="container">
+    <div class= "row">
+        <div class="col">
+            {% if hotQuestions %}
+            <h3>!!HOT QUESTION!!</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Top</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Votes</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for hotq in hotQuestions %}
+                <tr
+                    onclick="location.href=`{%url 'vote:detail' hotq.id%}`"
+                    style="cursor: pointer;"
+                >
+                    <a href="{%url 'vote:detail' hotq.id%}">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ hotq.title }}</td>
+                    <td>{{ hotq.total_votes }}</td>
+                    </a>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No vote.</p>
+            {% endif %}
+        </div>
+        <div class="col">
+            <h3>!!LATEST QUESTION!!</h3>
+            {% if hotQuestions %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">DATE</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for latq in latestQuestions %}
+                <tr
+                    onclick="location.href=`{%url 'vote:detail' latq.id%}`"
+                    style="cursor: pointer;"
+                >
+                    <a href="{%url 'vote:detail' latq.id%}">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ latq.title }}</td>
+                    <td>{{ latq.pub_date }}</td>
+                    </a>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No vote.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

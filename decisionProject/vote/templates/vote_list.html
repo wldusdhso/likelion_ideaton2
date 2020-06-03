@@ -3,11 +3,10 @@
 <h2>Vote Board</h2>
 <div align="right">
   <button type="button" class="btn btn-outline-dark">
-    <a href="{% url 'create' %}">create</a>
+    <a href="{% url 'vote:create' %}">create</a>
   </button>
 </div>
 {% if question_list %}
-<ul class="list-group list-group-flush">
   <table class="table">
     <thead>
       <tr>
@@ -19,10 +18,10 @@
     <tbody>
       {% for question in question_list %}
       <tr
-        onclick="location.href=`{%url 'detail' question.id%}`"
+        onclick="location.href=`{%url 'vote:detail' question.id%}`"
         style="cursor: pointer;"
       >
-        <a href="{%url 'detail' question.id%}">
+        <a href="{%url 'vote:detail' question.id%}">
           <th scope="row">{{forloop.counter}}</th>
           <td>{{ question.title }}</td>
           <td>{{ question.writer }}</td>
@@ -34,4 +33,3 @@
   {% else %}
   <p>No vote.</p>
   {% endif %} {% endblock %}
-</ul>
