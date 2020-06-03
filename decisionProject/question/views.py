@@ -35,7 +35,7 @@ def edit(request,question_id):
 def update(request,question_id):
     edit_question = get_object_or_404(Question,pk = question_id)
     edit_question.title = request.POST['title']
-    edit_question.writer = request.user.username
+    edit_question.writer = request.user
     edit_question.content = request.POST['content']
     edit_question.pub_date = timezone.datetime.now()
     edit_question.save()
@@ -49,7 +49,7 @@ def delete(request,question_id):
 
 def create_answer(request, question_id):
     new_answer = Answer()
-    new_answer.writer = request.user.username
+    new_answer.writer = request.user
     new_answer.content = request.POST['content']
     new_answer.pub_date = timezone.datetime.now()
     new_answer.question_id = question_id
@@ -65,7 +65,7 @@ def edit_answer(request,answer_id):
 
 def update_answer(request,answer_id):
     edit_answer = get_object_or_404(Answer,pk = answer_id)
-    edit_answer.writer = request.user.username
+    edit_answer.writer = request.user
     edit_answer.content = request.POST['content']
     edit_answer.pub_date = timezone.datetime.now()
     question_id = edit_answer.question_id
