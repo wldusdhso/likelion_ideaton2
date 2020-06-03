@@ -11,7 +11,19 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        background-color: rgb(235, 209, 228);
+        font-family: "Roboto", sans-serif;
+      }
+    </style>
   </head>
+
   <body>
     <!-- bootstrap js -->
     <script
@@ -62,26 +74,25 @@
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
-
           {% if request.user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'main:logout' %}">로그아웃</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'main:mypage' 'user' %}"
-                >마이페이지</a
-              >
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:logout' %}">로그아웃</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="{% url 'main:mypage' request.user.username %}"
+              >마이페이지</a
+            >
+          </li>
           {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'main:login' %}">로그인</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'main:register' %}">회원가입</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:login' %}">로그인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:register' %}">회원가입</a>
+          </li>
           {% endif %}
-          
-
         </ul>
       </div>
     </nav>

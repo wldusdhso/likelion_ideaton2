@@ -13,16 +13,25 @@
 <body id="seven">
     {% extends 'base.html' %} {% block content %}
 
-<h1>결정장애를 위한 웹서비스입니다.</h1>
-
 <br>
 <div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron" style="background-color: rgb(247, 236, 247);">
+                <h1 class="display-4">DECISION MAKING</h1>
+                <p class="lead"></p>
+                <hr class="my-4">
+                <p>대신 결정해드립니다.</p>
+            </div>
+        </div>
+    </div>
+    <br>
     <div class= "row">
         <div class="col">
             <h3>!!HOT VOTES!!</h3>
             {% if hotVotes %}
-            <table class="table">
-                <thead>
+            <table class="table table-striped">
+                <thead >
                 <tr>
                     <th scope="col">Top</th>
                     <th scope="col">Title</th>
@@ -51,7 +60,7 @@
         <div class="col">
             <h3>!!HOT QUESTION!!</h3>
             {% if hotQuestions %}
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">Top</th>
@@ -80,12 +89,12 @@
             {% endif %}
         </div>
     </div>
-    <br>
+    <br><hr><br>
     <div class="row">
         <div class="col">
             <h3>!!LATEST VOTES!!</h3>
             {% if latestVotes %}
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -116,7 +125,7 @@
         <div class="col">
             <h3>!!LATEST QUESTION!!</h3>
             {% if latestQuestions %}
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
