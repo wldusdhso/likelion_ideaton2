@@ -1,6 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 
 <h1>결정장애를 위한 웹서비스입니다.</h1>
+    {% for account in accounts %}
+        <p>{{account.username}}</p>
+        <br>
+        <p>{{account.password}}</p>
 
+    {% endfor %}
 {% endblock %}
 
