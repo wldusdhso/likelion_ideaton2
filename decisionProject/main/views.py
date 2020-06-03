@@ -1,17 +1,30 @@
 from django.shortcuts import render, redirect
+from vote.models import Question as vQuestion
+from question.models import Question, Answer
 from django.contrib.auth.models import User
 from vote.models import Question
-
 from django.contrib import auth
 
 # Create your views here.
 def home(request):
-    hotQuestions = Question.objects.order_by('-total_votes')[:5]
+    hotVotes = vQuestion.objects.order_by('-total_votes')[:5]
+    latestVotes = vQuestion.objects.order_by('-pub_date')[:5]
     latestQuestions = Question.objects.order_by('-pub_date')[:5]
-    
+
+    questions = {}
+    for q in Question.objects.all() :
+        count = Answer.objects.filter(question_id=q.id).count()
+        questions[q.id] = count
+    hotQuestions = sorted(questions, key = lambda x : questions[x], reverse=True)[:5]
+
+    for i in range(len(hotQuestions)):
+        hotQuestions[i] = [Question.objects.get(id=hotQuestions[i]), Answer.objects.filter(question_id=hotQuestions[i]).count()]
+
     return render(request, 'home.html',{
         'hotQuestions' : hotQuestions,
         'latestQuestions' : latestQuestions,
+        'hotVotes' : hotVotes,
+        'latestVotes' : latestVotes,
     })
 
 def mypage(request, profile_name):
@@ -45,8 +58,3 @@ def logout(request):
     auth.logout(request)
     print('logout 실행')
     return redirect('main:home')
-
-    
-
-
-
