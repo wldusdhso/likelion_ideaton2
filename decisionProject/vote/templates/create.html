@@ -1,97 +1,112 @@
-{% extends 'base.html' %} {% block content %}
-
-<script type="text/javascript">
-  window.onload = function () {
-    // console.log("test start!");
-    var add_btn = document.getElementById("add_btn");
-    var num_of_count = document.getElementById("count");
-    var choice_area = document.getElementById("choice_area");
-
-    add_btn.onclick = function () {
-      var element = document.createElement("p");
-      element.innerHTML = document.getElementById("input_choice").value;
-      choice_area.appendChild(element);
-
-      var rm_btn = document.createElement("button");
-      rm_btn.type = "button";
-      rm_btn.addEventListener("click", function () {
-        choice_area.removeChild(element);
-        num_of_count.value = parseInt(num_of_count.value) - 1;
-      });
-
-      rm_btn.innerHTML = "DEL";
-      element.appendChild(rm_btn);
-
-      var hidden_elem = document.createElement("input");
-      hidden_elem.type = "hidden";
-      hidden_elem.className = "hidden_elem";
-      hidden_elem.value = document.getElementById("input_choice").value;
-      element.appendChild(hidden_elem);
-
-      num_of_count.value = parseInt(num_of_count.value) + 1;
-    };
-  };
-
-  function givenum() {
-    var elem = document.getElementsByClassName("hidden_elem");
-    var num_of_count = document.getElementById("count");
-    for (var i = 0; i < parseInt(num_of_count.value); i++) {
-      elem[i].name = "text".concat(i);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create</title>
+  <style>
+    #seven{
+        background-color: rgb(235, 209, 228);
     }
-  }
-</script>
+</style>
+</head>
+<body id="seven">
+  {% extends 'base.html' %} {% block content %}
 
-<br />
-<form method="POST" enctype="multipart/form-data" onsubmit="givenum()">
-  {%csrf_token%}
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">제목</span>
+  <script type="text/javascript">
+    window.onload = function () {
+      // console.log("test start!");
+      var add_btn = document.getElementById("add_btn");
+      var num_of_count = document.getElementById("count");
+      var choice_area = document.getElementById("choice_area");
+  
+      add_btn.onclick = function () {
+        var element = document.createElement("p");
+        element.innerHTML = document.getElementById("input_choice").value;
+        choice_area.appendChild(element);
+  
+        var rm_btn = document.createElement("button");
+        rm_btn.type = "button";
+        rm_btn.addEventListener("click", function () {
+          choice_area.removeChild(element);
+          num_of_count.value = parseInt(num_of_count.value) - 1;
+        });
+  
+        rm_btn.innerHTML = "DEL";
+        element.appendChild(rm_btn);
+  
+        var hidden_elem = document.createElement("input");
+        hidden_elem.type = "hidden";
+        hidden_elem.className = "hidden_elem";
+        hidden_elem.value = document.getElementById("input_choice").value;
+        element.appendChild(hidden_elem);
+  
+        num_of_count.value = parseInt(num_of_count.value) + 1;
+      };
+    };
+  
+    function givenum() {
+      var elem = document.getElementsByClassName("hidden_elem");
+      var num_of_count = document.getElementById("count");
+      for (var i = 0; i < parseInt(num_of_count.value); i++) {
+        elem[i].name = "text".concat(i);
+      }
+    }
+  </script>
+  
+  <br />
+  <form method="POST" enctype="multipart/form-data" onsubmit="givenum()">
+    {%csrf_token%}
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">제목</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+      />
     </div>
-    <input
-      type="text"
-      class="form-control"
-      name="title"
-      aria-label="Username"
-      aria-describedby="basic-addon1"
-    />
-  </div>
-
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">작성자</span>
+  
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">작성자</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        name="writer"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+      />
     </div>
-    <input
-      type="text"
-      class="form-control"
-      name="writer"
-      aria-label="Username"
-      aria-describedby="basic-addon1"
-    />
-  </div>
-
-  <hr />
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">Choice</span>
+  
+    <hr />
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Choice</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="input_choice"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+      />
+      <button type="button" class="btn btn-outline-secondary" id="add_btn">
+        ADD
+      </button>
     </div>
-    <input
-      type="text"
-      class="form-control"
-      id="input_choice"
-      aria-label="Username"
-      aria-describedby="basic-addon1"
-    />
-    <button type="button" class="btn btn-outline-secondary" id="add_btn">
-      ADD
-    </button>
-  </div>
-  <input type="hidden" id="count" name="count" value="0" />
-
-  <div id="choice_area"></div>
-  <hr />
-
-  <button type="submit">제출</button>
-</form>
-
-{% endblock %}
+    <input type="hidden" id="count" name="count" value="0" />
+  
+    <div id="choice_area"></div>
+    <hr />
+  
+    <button type="submit">제출</button>
+  </form>
+  
+  {% endblock %}
+</body>
+</html>

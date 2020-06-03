@@ -1,35 +1,50 @@
-{% extends 'base.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote_list</title>
+  <style>
+    #seven{
+        background-color: rgb(235, 209, 228);
+    }
+</style>
+</head>
+<body id="seven">
+    {% extends 'base.html' %} {% block content %}
 
-<h2>Vote Board</h2>
-<div align="right">
-  <button type="button" class="btn btn-outline-dark">
-    <a href="{% url 'vote:create' %}">create</a>
-  </button>
-</div>
-{% if question_list %}
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Title</th>
-        <th scope="col">Writer</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for question in question_list %}
-      <tr
-        onclick="location.href=`{%url 'vote:detail' question.id%}`"
-        style="cursor: pointer;"
-      >
-        <a href="{%url 'vote:detail' question.id%}">
-          <th scope="row">{{forloop.counter}}</th>
-          <td>{{ question.title }}</td>
-          <td>{{ question.writer }}</td>
-        </a>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-  <p>No vote.</p>
-  {% endif %} {% endblock %}
+    <h2>Vote Board</h2>
+    <div align="right">
+      <button type="button" class="btn btn-outline-dark">
+        <a href="{% url 'vote:create' %}">create</a>
+      </button>
+    </div>
+    {% if question_list %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Writer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for question in question_list %}
+          <tr
+            onclick="location.href=`{%url 'vote:detail' question.id%}`"
+            style="cursor: pointer;"
+          >
+            <a href="{%url 'vote:detail' question.id%}">
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{ question.title }}</td>
+              <td>{{ question.writer }}</td>
+            </a>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No vote.</p>
+      {% endif %} {% endblock %}
+</body>
+</html>

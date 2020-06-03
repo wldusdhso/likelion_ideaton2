@@ -1,4 +1,17 @@
-{% extends 'base.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        #seven{
+            background-color: rgb(235, 209, 228);
+        }
+    </style>
+</head>
+<body id="seven">
+    {% extends 'base.html' %} {% block content %}
 
 <h1>결정장애를 위한 웹서비스입니다.</h1>
 
@@ -132,12 +145,9 @@
         </div>
     </div>
 </div>
-<!--     {% for account in accounts %}
-        <p>{{account.username}}</p>
-        <br>
-        <p>{{account.password}}</p>
-
-    {% endfor %} -->
 
 {% endblock %}
 
+
+</body>
+</html>
