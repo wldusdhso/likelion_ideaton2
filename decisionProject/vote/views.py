@@ -4,7 +4,7 @@ from django.utils import timezone
 # Create your views here.
 
 def vote_list(request):
-    question_list = Question.objects.order_by('-pub_date')
+    question_list = Question.objects.order_by('pub_date')
     return render(request, 'vote_list.html', {'question_list': question_list})
 
 def detail(request, question_id):

@@ -1,13 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
 <h1>{{ question.title }}</h1>
-<a href="{%url 'delete' question.id%}">삭제</a>
+<div align="right"><button type="button" class="btn btn-outline-dark">
+    <a href="{%url 'delete' question.id%}">삭제</a></button></div>
 
-<hr>
 
-<ul>
+<ul class="list-group list-group-flush">
 {% for choice in question.choice_set.all %}
-    <li>{{ choice.text }} ----- {{ choice.votes }}</li>
+    <li class="list-group-item">{{ choice.text }} ----- {{ choice.votes }}</li>
 {% endfor %}
 </ul>
+<br>
 
-<a href="{% url 'vote_list' %}">Home</a>
-<a href="{% url 'vote' question.id %}">Vote</a>
+<button type="button" class="btn btn-outline-dark"><a href="{% url 'vote_list' %}">Home</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="{% url 'vote' question.id %}">Vote</a></button>
+
+{% endblock %}
