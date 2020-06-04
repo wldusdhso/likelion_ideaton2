@@ -4,27 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Edit</title>
-    <style>
-        #five{
-            padding-left:900px;
-            font-size: xx-large;
-            
-        }
-        #one{
-            padding-left:60px;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            height: auto; 
-            width: 100%; 
-            border:3px solid black;
-            background-color: rgb(255, 255, 255);
 
-        }
-        #seven{
-            background-color: rgb(235, 209, 228);
-        }
-        
-    </style>
 </head>
 <body id="seven">
     {% extends 'base.html' %} {% block content %}
@@ -37,8 +17,36 @@
     <path fill-rule="evenodd" d="M11.537 5.146a.5.5 0 0 1 0 .708l-5 5a.5.5 0 0 1-.708-.708l5-5a.5.5 0 0 1 .707 0z"/>
   </svg>  BACK</a>
 <br>
-<hr>
-<div id="one">
+
+<section>
+    <form action="{% url 'question:update' question.id %}" method="POST">
+        {% csrf_token %}
+        <div class="row uniform 50%">
+
+            <div class="12u$">
+                <input type="text" placeholder="제목" value = "{{question.title}}" name="title">
+            </div>
+
+            <div class="12u$">
+                <input type="text" value="{{user.username}}" name="title" style="background-color: #f3f3f3de" readonly>
+            </div>
+
+
+            <div class="12u$">
+                <textarea name="content" id="demo-message" placeholder="내용" rows="6">{{question.content}}</textarea>
+            </div>
+            <div class="12u$">
+                <ul class="actions">
+                    <li><input type="submit" value="EDIT" class="special" /></li>
+                    <li><input type="reset" value="Reset" /></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+<!-- <div id="one">
 <form action = "{% url 'question:update' question.id %}" method="POST">
     {% csrf_token %}
 
@@ -53,7 +61,7 @@
 
 </form>
 
-</div>
+</div> -->
 {% endblock %}
 
 
