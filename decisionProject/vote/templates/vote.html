@@ -13,12 +13,8 @@
     {% csrf_token %}
     <br>
     {% for choice in question.choice_set.all %}   
-    <div class="input-group">   
-        <div class="input-group-prepend">       
-            <div class="input-group-text">
-               <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}" aria-label="Radio button for following text input">
-            </div>
-        </div>
+    <div class="4u 12u$(xsmall)">
+        <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{choice.id}}" aria-label="Radio button for following text input">
         <label class="form-control" for="choice{{forloop.counter}}">{{choice.text}}</label>
     </div>
     {% endfor %}
