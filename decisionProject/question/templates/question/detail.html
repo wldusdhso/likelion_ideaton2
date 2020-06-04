@@ -57,6 +57,7 @@
             </svg> ID : {{ans.writer}}</h5> <p>{{ans.pub_date}}</p>
             
             <pre><code>{{ans.content}}</code></pre>
+            {% if user == ans.writer %}
             <details>
                 <summary>댓글수정</summary>
                 <hr>
@@ -67,6 +68,7 @@
                 <button type = "submit">답변수정</button>
                 </form>
             </details>
+            {% endif %}
         <br>  
         <hr style="border: 1px solid;">
             {% endfor %}
