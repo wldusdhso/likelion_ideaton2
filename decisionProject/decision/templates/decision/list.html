@@ -1,15 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2>Decision Page</h2>
-<hr />
-<br />
+<h1>Decision Page</h1><br>
 <form
   action="{% url 'decision:result' %}"
   method="POST"
   enctype="multipart/form-data"
 >
-  {% csrf_token %} 결정장애 내용 : <input type="text" name="content" />
-  <br />
+  {% csrf_token %} 
+  
+  <p>결정장애 내용 : <input type="text" name="content" /></p>
   <small style="color: crimson;">* Yes/No 대답으로 가능한 질문만 작성.</small>
   <br /><br />
   <button type="submit">결정해!</button>

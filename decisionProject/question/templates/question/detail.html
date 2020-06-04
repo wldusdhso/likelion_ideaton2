@@ -4,34 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Detail</title>
-    <style>
-        #one{
-            padding-left:100px;
-            height: auto; 
-            width: 100%; 
-            border:3px solid black;
-            background-color: white;
-
-        }
-        #two{
-            padding-left:30px;
-        }
-        #four{
-            padding-left: 800px;
-        }
-        #five{
-            padding-left:900px;
-            font-size: xx-large;
-            
-        }
-        #six{
-            background-color: rgb(255, 255, 255);
-            width:12.5%;
-        }
-        #seven{
-            background-color: rgb(235, 209, 228);
-        }
-    </style>
 </head>
 <body id="seven">
     {% extends 'base.html' %} {% block content %}
@@ -43,55 +15,48 @@
     <path fill-rule="evenodd" d="M5.83 5.146a.5.5 0 0 0 0 .708l5 5a.5.5 0 0 0 .707-.708l-5-5a.5.5 0 0 0-.708 0z"/>
     <path fill-rule="evenodd" d="M11.537 5.146a.5.5 0 0 1 0 .708l-5 5a.5.5 0 0 1-.708-.708l5-5a.5.5 0 0 1 .707 0z"/>
   </svg>  BACK</a>
-<br>
-<hr>
-<br>
-<div id="one"><br>
-    <h2><{{question.title}}></h2>
-    <br>
-    <p>ID : {{question.writer}}</p>
-    <hr align="left" style="black; width: 65%;">
-    <p>{{question.pub_date}}</p>
-    <hr align="left" style="black; width: 65%;">
-    <h4>{{question.content}}</h4>
-   <br>
-   {% if user.username == question.writer %}
-        <h5 id="four"><a href = "{% url 'question:edit' question.id %}">edit </a>
+  <br/>
+  <br/>
+    <div class="inner" style="background-color: #f3f3f3de; padding: 3em;">
+        <div class="content">
+            <header>
+                <h2>{{question.title}}</h2>
+                <p>ID : {{question.writer}} // {{question.pub_date}}</p>
+            </header>
+            <blockquote>{{question.content}}</blockquote>
+            
+        </div>
+
+        {% if user == question.writer %}
+        <h5><a href = "{% url 'question:edit' question.id %}">edit  </a> /
         
         <a href = "{% url 'question:delete' question.id %}"> delete </a>
-      
         </h5>
         {%else%}
         {%endif%}
+    </div>
         <br>
-</div> 
-        <hr>
-        <br>
-        <h2 id="six">ANSWER</h2>
         <details>
             <summary>댓글작성</summary>
             <form action = "{% url 'question:create_answer' question.id %}" method="POST">
                 {% csrf_token %}
-            <p>작성자 : {{request.user}}</p>
-            <p> 내용 : <textarea name ="content" id="" cols="30" rows="10"></textarea></p>
+            <p style="margin-bottom: 0px;">작성자 : {{request.user}}</p>
+            <p> 내용 : <textarea name ="content" id="" cols="30" rows="2"></textarea></p>
             <button type = "submit">답변</button>
             </form>
         </details>
        
-<br>
-        <hr style="border: dashed 2px black;">
+        <hr style="border: 1px solid;">
         <br>
         <h3>Answer List</h3>
             <br>
             {% for ans in answer %}
-            <hr>
-            <h6><svg class="bi bi-arrow-return-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <h5><svg class="bi bi-arrow-return-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M10.146 5.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 9l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
                 <path fill-rule="evenodd" d="M3 2.5a.5.5 0 0 0-.5.5v4A2.5 2.5 0 0 0 5 9.5h8.5a.5.5 0 0 0 0-1H5A1.5 1.5 0 0 1 3.5 7V3a.5.5 0 0 0-.5-.5z"/>
-            </svg> ID : {{ans.writer}}</h6> <p>{{ans.pub_date}}</p>
-            <br>
-            <h4 id="two">{{ans.content}}</h4> 
-            <br>
+            </svg> ID : {{ans.writer}}</h5> <p>{{ans.pub_date}}</p>
+            
+            <pre><code>{{ans.content}}</code></pre>
             <details>
                 <summary>댓글수정</summary>
                 <hr>
@@ -103,15 +68,8 @@
                 </form>
             </details>
         <br>  
-        <br>
+        <hr style="border: 1px solid;">
             {% endfor %}
-            
-       
-
-<br>
-<hr>
-<hr>
-<br>
 
 
 {% endblock %}

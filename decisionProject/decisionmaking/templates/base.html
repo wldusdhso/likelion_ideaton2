@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,10 +20,13 @@
     <style>
       html,
       body {
-        background-color: rgb(235, 209, 228);
+        background-color: whitesmoke;
         font-family: "Roboto", sans-serif;
       }
+      
     </style>
+    
+    <link rel="stylesheet" href="/static/assets/css/main.css" />
   </head>
 
   <body>
@@ -42,8 +47,30 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a class="logo" href="/">Decision Making</a>
+					<nav id="nav">
+						<a href="{% url 'decision:list' %}">결정선택</a>
+						<a href="{% url 'vote:vote_list' %}">결정투표</a>
+            <a href="{% url 'question:list' %}">결정질문</a>
+            
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'main:logout' %}">로그아웃</a>
+            <a href="{% url 'main:mypage' request.user.username %}">마이페이지</a>
+            
+          {% else %}
+            <a href="{% url 'main:login' %}">로그인</a>\
+            <a href="{% url 'main:register' %}">회원가입</a>
+          {% endif %}
+					</nav>
+				</div>
+			</header>
+			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">Decision Making</a>
       <button
         class="navbar-toggler"
@@ -67,7 +94,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'question:list' %}">결정질문</a>
           </li>
+          
         </ul>
+
         <ul class="navbar-nav my-2 my-lg-0">
           {% if request.user.is_authenticated %}
             <li class="nav-item">
@@ -88,11 +117,18 @@
           {% endif %}
         </ul>
       </div>
-    </nav>
+    </nav> -->
     <!-- navbar end -->
     <br />
     <div class="container">
       {% block content %} {% endblock %}
     </div>
+
+
+    <!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/skel.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
   </body>
 </html>
