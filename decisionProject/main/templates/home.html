@@ -76,11 +76,11 @@
                 <tbody>
                 {% for hotq, count in hotQuestions %}
                 <tr
-                    onclick="location.href=`{%url 'vote:detail' hotq.id%}`"
+                    onclick="location.href=`{%url 'question:detail' hotq.id%}`"
                     style="cursor: pointer;"
                 >
                 
-                    <a href="{%url 'vote:detail' hotq.id%}">
+                    <a href="{%url 'question:detail' hotq.id%}">
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{ hotq.title }}</td>
                     <td>{{ count }}</td>
@@ -141,10 +141,10 @@
                 <tbody>
                 {% for latq in latestQuestions %}
                 <tr
-                    onclick="location.href=`{%url 'vote:detail' latq.id%}`"
+                    onclick="location.href=`{%url 'question:detail' latq.id%}`"
                     style="cursor: pointer;"
                 >
-                    <a href="{%url 'vote:detail' latq.id%}">
+                    <a href="{%url 'question:detail' latq.id%}">
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{ latq.title }}</td>
                     <td>{{ latq.pub_date }}</td>
